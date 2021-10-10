@@ -1,5 +1,4 @@
-enum class Alignment
-{
+enum class Alignment{
     LEFT,
     RIGHT,
     CENTER,
