@@ -1,3 +1,4 @@
+// Типы выравнивания
 enum class Alignment{
     LEFT,
     RIGHT,
