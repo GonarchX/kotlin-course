@@ -9,26 +9,36 @@ class LeftAlign_Test(val inputString: String, val lineWidth: Int, val expected: 
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data() : Collection<Array<Any>> {
+        fun data(): Collection<Array<Any>> {
             return listOf(
                 arrayOf("a", 5, "a"),                    // 0 test:  (inputString = "a", lineWidth = 5, expected = "a")
-                arrayOf("a a", 5, "a a"),                // 1 test:  (inputString = "a a", lineWidth = 5, expected = "a a")
+                arrayOf(
+                    "a a",
+                    5,
+                    "a a"
+                ),                // 1 test:  (inputString = "a a", lineWidth = 5, expected = "a a")
                 arrayOf("a a a", 5, "a a a"),            // 2 test
                 arrayOf("a a a a", 5, "a a a\na"),       // 3 test
                 arrayOf("a a a a a", 5, "a a a\na a"),   // 4 test
-                arrayOf("abc abc abc", 5,
+                arrayOf(
+                    "abc abc abc", 5,
+                    "abc\n" +
                             "abc\n" +
-                            "abc\n" +
-                            "abc"),
-                arrayOf("abc_abc_abc_abc!@#$%^&*()_", 5,
+                            "abc"
+                ),
+                arrayOf(
+                    "abc_abc_abc_abc!@#$%^&*()_", 5,
                     "abc_a\n" +
                             "bc_ab\n" +
                             "c_abc\n" +
                             "!@#\$%\n" +
                             "^&*()\n" +
-                            "_"),                        // 5 test
-                arrayOf("abc_abc_abc_abc!@#$%^&*()_", 100,
-                        "abc_abc_abc_abc!@#\$%^&*()_"),  // 6 test
+                            "_"
+                ),                        // 5 test
+                arrayOf(
+                    "abc_abc_abc_abc!@#$%^&*()_", 100,
+                    "abc_abc_abc_abc!@#\$%^&*()_"
+                ),  // 6 test
                 arrayOf("", 100, ""),                    // 7 test
                 arrayOf(" ", 100, "")                    // 8 test
             )
@@ -41,13 +51,13 @@ class LeftAlign_Test(val inputString: String, val lineWidth: Int, val expected: 
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun leftAlign_Exception_zeroLineWidth(){
-        alignText("",Alignment.LEFT, 0)
+    fun leftAlign_Exception_zeroLineWidth() {
+        alignText("", Alignment.LEFT, 0)
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun leftAlign_Exception_negativeLineWidth(){
-        alignText("",Alignment.LEFT, -1)
+    fun leftAlign_Exception_negativeLineWidth() {
+        alignText("", Alignment.LEFT, -1)
     }
 }
 
@@ -57,26 +67,36 @@ class RightAlign_Test(val inputString: String, val lineWidth: Int, val expected:
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data() : Collection<Array<Any>> {
+        fun data(): Collection<Array<Any>> {
             return listOf(
-                arrayOf("a", 5, "    a"),                     // 0 test:  (inputString = "a", lineWidth = 5, expected = "    a")
+                arrayOf(
+                    "a",
+                    5,
+                    "    a"
+                ),                     // 0 test:  (inputString = "a", lineWidth = 5, expected = "    a")
                 arrayOf("a a", 5, "  a a"),                   // 1 test:
                 arrayOf("a a a", 5, "a a a"),                 // 2 test
-                 arrayOf("a a a a", 5, "a a a\n    a"),       // 3 test
-                 arrayOf("a a a a a", 5, "a a a\n  a a"),     // 4 test
-                 arrayOf("abc abc abc", 5,
-                     "  abc\n" +
-                             "  abc\n" +
-                             "  abc"),
-                arrayOf("abc_abc_abc_abc!@#$%^&*()_", 5,
+                arrayOf("a a a a", 5, "a a a\n    a"),       // 3 test
+                arrayOf("a a a a a", 5, "a a a\n  a a"),     // 4 test
+                arrayOf(
+                    "abc abc abc", 5,
+                    "  abc\n" +
+                            "  abc\n" +
+                            "  abc"
+                ),
+                arrayOf(
+                    "abc_abc_abc_abc!@#$%^&*()_", 5,
                     "abc_a\n" +
                             "bc_ab\n" +
                             "c_abc\n" +
                             "!@#\$%\n" +
                             "^&*()\n" +
-                            "    _"),                        // 5 test
-                arrayOf("abc_abc_abc_abc!@#$%^&*()_", 30,
-                    "    abc_abc_abc_abc!@#\$%^&*()_"),      // 6 test
+                            "    _"
+                ),                        // 5 test
+                arrayOf(
+                    "abc_abc_abc_abc!@#$%^&*()_", 30,
+                    "    abc_abc_abc_abc!@#\$%^&*()_"
+                ),      // 6 test
                 arrayOf("", 5, ""),                    // 7 test
             )
         }
@@ -88,13 +108,13 @@ class RightAlign_Test(val inputString: String, val lineWidth: Int, val expected:
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun rightAlign_Exception_zeroLineWidth(){
-        alignText("",Alignment.RIGHT, 0)
+    fun rightAlign_Exception_zeroLineWidth() {
+        alignText("", Alignment.RIGHT, 0)
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun rightAlign_Exception_negativeLineWidth(){
-        alignText("",Alignment.RIGHT, -1)
+    fun rightAlign_Exception_negativeLineWidth() {
+        alignText("", Alignment.RIGHT, -1)
     }
 }
 
@@ -104,26 +124,36 @@ class CenterAlign_Test(val inputString: String, val lineWidth: Int, val expected
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data() : Collection<Array<Any>> {
+        fun data(): Collection<Array<Any>> {
             return listOf(
-                arrayOf("a", 5, "  a"),                    // 0 test:  (inputString = "a", lineWidth = 5, expected = "  a")
+                arrayOf(
+                    "a",
+                    5,
+                    "  a"
+                ),                    // 0 test:  (inputString = "a", lineWidth = 5, expected = "  a")
                 arrayOf("a a", 5, " a a"),                 // 1 test:
                 arrayOf("a a a", 5, "a a a"),              // 2 test
                 arrayOf("a a a a", 5, "a a a\n  a"),       // 3 test
                 arrayOf("a a a a a", 5, "a a a\n a a"),    // 4 test
-                arrayOf("abc abc abc", 5,
+                arrayOf(
+                    "abc abc abc", 5,
                     " abc\n" +
                             " abc\n" +
-                            " abc"),
-                arrayOf("abc_abc_abc_abc!@#$%^&*()_", 5,
+                            " abc"
+                ),
+                arrayOf(
+                    "abc_abc_abc_abc!@#$%^&*()_", 5,
                     "abc_a\n" +
                             "bc_ab\n" +
                             "c_abc\n" +
                             "!@#\$%\n" +
                             "^&*()\n" +
-                            "  _"),                        // 5 test
-                arrayOf("abc_abc_abc_abc!@#$%^&*()_", 30,
-                    "  abc_abc_abc_abc!@#\$%^&*()_"),      // 6 test
+                            "  _"
+                ),                        // 5 test
+                arrayOf(
+                    "abc_abc_abc_abc!@#$%^&*()_", 30,
+                    "  abc_abc_abc_abc!@#\$%^&*()_"
+                ),      // 6 test
                 arrayOf("", 5, ""),                        // 7 test
             )
         }
@@ -135,13 +165,13 @@ class CenterAlign_Test(val inputString: String, val lineWidth: Int, val expected
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun centerAlign_Exception_zeroLineWidth(){
-        alignText("",Alignment.CENTER, 0)
+    fun centerAlign_Exception_zeroLineWidth() {
+        alignText("", Alignment.CENTER, 0)
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun centerAlign_Exception_negativeLineWidth(){
-        alignText("",Alignment.CENTER, -1)
+    fun centerAlign_Exception_negativeLineWidth() {
+        alignText("", Alignment.CENTER, -1)
     }
 }
 
@@ -151,26 +181,36 @@ class JustifyAlign_Test(val inputString: String, val lineWidth: Int, val expecte
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data() : Collection<Array<Any>> {
+        fun data(): Collection<Array<Any>> {
             return listOf(
-                arrayOf("a", 5, "a"),                              // 0 test:  (inputString = "a", lineWidth = 5, expected = "a")
+                arrayOf(
+                    "a",
+                    5,
+                    "a"
+                ),                              // 0 test:  (inputString = "a", lineWidth = 5, expected = "a")
                 arrayOf("a a", 5, "a   a"),                        // 1 test:
                 arrayOf("a a a", 10, "a   a   a"),                 // 2 test
                 arrayOf("a  a  a  a", 10, "a  a  a  a"),           // 3 test
                 arrayOf("a a a a aaa", 10, "a  a  a  a\naaa"),     // 4 test
-                arrayOf("abc abc abc", 5,
+                arrayOf(
+                    "abc abc abc", 5,
                     "abc\n" +
                             "abc\n" +
-                            "abc"),
-                arrayOf("abc_abc_abc_abc!@#$%^&*()_", 5,
+                            "abc"
+                ),
+                arrayOf(
+                    "abc_abc_abc_abc!@#$%^&*()_", 5,
                     "abc_a\n" +
                             "bc_ab\n" +
                             "c_abc\n" +
                             "!@#\$%\n" +
                             "^&*()\n" +
-                            "_"),                                 // 5 test
-                arrayOf("abc_abc_abc_abc!@#$%^&*()_", 30,
-                    "abc_abc_abc_abc!@#\$%^&*()_"),               // 6 test
+                            "_"
+                ),                                 // 5 test
+                arrayOf(
+                    "abc_abc_abc_abc!@#$%^&*()_", 30,
+                    "abc_abc_abc_abc!@#\$%^&*()_"
+                ),               // 6 test
                 arrayOf("", 5, ""),                               // 7 test
                 arrayOf("abab a aba", 11, "abab a aba"),          // 8 test
             )
@@ -183,12 +223,12 @@ class JustifyAlign_Test(val inputString: String, val lineWidth: Int, val expecte
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun justifyAlign_Exception_zeroLineWidth(){
-        alignText("",Alignment.JUSTIFY, 0)
+    fun justifyAlign_Exception_zeroLineWidth() {
+        alignText("", Alignment.JUSTIFY, 0)
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun justifyAlign_Exception_negativeLineWidth(){
-        alignText("",Alignment.JUSTIFY, -1)
+    fun justifyAlign_Exception_negativeLineWidth() {
+        alignText("", Alignment.JUSTIFY, -1)
     }
 }
