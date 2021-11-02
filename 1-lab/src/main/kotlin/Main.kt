@@ -1,8 +1,8 @@
 import java.lang.Exception
 
 fun main() {
-    var inputString: String =
+    val inputString =
         "Везет Сенька Саньку с Сонькой на санках. Санки скок, Сеньку с ног, Соньку в лоб, все - в сугроб."
-    var result = alignText(inputString, Alignment.CENTER, 10)
+    val result = alignText(inputString, Alignment.CENTER, 10)
     print(result)
 }
