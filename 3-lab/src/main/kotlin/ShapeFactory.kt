@@ -3,39 +3,35 @@ package lab3
 import java.lang.Exception
 import kotlin.random.Random
 
-const val MIN_RANDOM_PARAMETER: Double = 0.0
-const val MAX_RANDOM_PARAMETER: Double = 1.0
-const val STANDART_SHAPE_PARAMETER: Double = 1.0
-
 interface ShapeFactory {
-    fun createCircle(radius: Double = STANDART_SHAPE_PARAMETER): Circle
-    fun createSquare(sideLen: Double = STANDART_SHAPE_PARAMETER): Square
-    fun createRectangle(sideLenA: Double = STANDART_SHAPE_PARAMETER, sideLenB: Double = STANDART_SHAPE_PARAMETER): Rectangle
-    fun createTriangle(sideLenA: Double = STANDART_SHAPE_PARAMETER, sideLenB: Double = STANDART_SHAPE_PARAMETER, sideLenC: Double = STANDART_SHAPE_PARAMETER): Triangle
+    fun createCircle(radius: Double): Circle
+    fun createSquare(sideLen: Double): Square
+    fun createRectangle(sideLenA: Double, sideLenB: Double): Rectangle
+    fun createTriangle(sideLenA: Double, sideLenB: Double, sideLenC: Double): Triangle
 
     fun createRandomCircle(
-        radiusMinLen: Double = MIN_RANDOM_PARAMETER,
-        radiusMaxLen: Double = MAX_RANDOM_PARAMETER
+        radiusMinLen: Double,
+        radiusMaxLen: Double
     ): Circle
 
     fun createRandomSquare(
-        sideMinLen: Double = MIN_RANDOM_PARAMETER,
-        sideMaxLen: Double = MAX_RANDOM_PARAMETER
+        sideMinLen: Double,
+        sideMaxLen: Double
     ): Square
 
     fun createRandomRectangle(
-        sideMinLen: Double = MIN_RANDOM_PARAMETER,
-        sideMaxLen: Double = MAX_RANDOM_PARAMETER
+        sideMinLen: Double,
+        sideMaxLen: Double
     ): Rectangle
 
     fun createRandomTriangle(
-        sideMinLen: Double = MIN_RANDOM_PARAMETER,
-        sideMaxLen: Double = MAX_RANDOM_PARAMETER
+        sideMinLen: Double,
+        sideMaxLen: Double
     ): Triangle
 
     fun createRandomShape(
-        sideMinLen: Double = MIN_RANDOM_PARAMETER,
-        sideMaxLen: Double = MAX_RANDOM_PARAMETER
+        sideMinLen: Double,
+        sideMaxLen: Double
     ): Shape
 }
 
@@ -102,10 +98,10 @@ class ShapeFactoryImpl : ShapeFactory {
             throw IllegalArgumentException("The lower bound must be less than upper bound!")
 
         return when ((0..3).random()) {
-            0 -> createRandomCircle()
-            1 -> createRandomSquare()
-            2 -> createRandomRectangle()
-            3 -> createRandomTriangle()
+            0 -> createRandomCircle(sideMinLen, sideMaxLen)
+            1 -> createRandomSquare(sideMinLen, sideMaxLen)
+            2 -> createRandomRectangle(sideMinLen, sideMaxLen)
+            3 -> createRandomTriangle(sideMinLen, sideMaxLen)
             else -> throw Exception("Invalid random result!")
         }
     }
