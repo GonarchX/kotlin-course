@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c62427d-c6ff-4a2a-9d12-ee0a0f69f113" name="Changes" comment="1.0 version:&#10;complete core part &#10;no tests" />
+    <list default="true" id="7c62427d-c6ff-4a2a-9d12-ee0a0f69f113" name="Changes" comment="1.0 version:&#10;complete core part &#10;no tests">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ShapeFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ShapeFactory.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,13 +69,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Gradle.centerAlign_Test">
+  <component name="RunManager" selected="Kotlin.MainKt">
     <configuration name="centerAlign_Test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -165,10 +169,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Kotlin.MainKt" />
+        <item itemvalue="Gradle.centerAlign_Test" />
         <item itemvalue="Kotlin.MainKt" />
         <item itemvalue="Gradle.textAlign_test" />
         <item itemvalue="Gradle.justifyAlign_Test" />
-        <item itemvalue="Gradle.centerAlign_Test" />
       </list>
     </recent_temporary>
   </component>
