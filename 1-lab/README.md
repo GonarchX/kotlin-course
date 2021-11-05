@@ -21,7 +21,7 @@
 Подсказка:
 
 
-```
+```kotlin
 enum class Alignment {
     LEFT,
     RIGHT,
@@ -30,7 +30,7 @@ enum class Alignment {
 }
 ```
 
-```
+```kotlin
 fun alignText(
 text: String,
 lineWidth: Int = 120,

@@ -22,7 +22,7 @@ _Опционально, чтобы получить 5 баллов (+1), нео
 
 Подсказка:
 
-```
+```kotlin
 interface Shape {
     fun calcArea(): Double
     fun calcPerimeter(): Double
@@ -34,7 +34,7 @@ class Rectangle /* implementation */
 class Triangle /* implementation */
 ```
 
-```
+```kotlin
 interface ShapeFactory {
     fun createCircle(/* parameters */): Circle
     fun createSquare(/* parameters */): Square
@@ -50,6 +50,6 @@ interface ShapeFactory {
     }
     
     class ShapeFactorImpl : ShapeFactory {
-    /*  implementation */z
+    /*  implementation */
 }
 ```
