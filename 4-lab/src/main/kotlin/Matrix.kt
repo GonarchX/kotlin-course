@@ -7,12 +7,10 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
     var dimension: Pair<Int, Int> = Pair(values.size, values[0].size)
 
     init {
-        if (values.size > 1) {
-            for (row in values) {
+        if (values.size > 1)
+            for (row in values)
                 if (row.size != values[0].size)
                     throw IllegalArgumentException("All matrix rows must be the same size!")
-            }
-        }
     }
 
     override fun iterator(): Iterator<Double> {
@@ -89,13 +87,10 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
 
         val resultMatrix = Matrix(createMutableListWithLists(this@Matrix.getRows(), other.getColumns()))
 
-        for (i in 0 until this@Matrix.getRows()) {
-            for (j in 0 until other.getColumns()) {
-                for (k in 0 until this@Matrix.getColumns()) {
+        for (i in 0 until this@Matrix.getRows())
+            for (j in 0 until other.getColumns())
+                for (k in 0 until this@Matrix.getColumns())
                     resultMatrix[i, j] += this@Matrix[i, k] * other[k, j]
-                }
-            }
-        }
 
         return resultMatrix
     }
@@ -109,19 +104,17 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
         this@Matrix.values = createMutableListWithLists(this@Matrix.getRows(), other.getColumns())
         this@Matrix.dimension = Pair(values.size, values[0].size)
 
-        for (i in 0 until tempMatrix.getRows()) {
-            for (j in 0 until other.getColumns()) {
-                for (k in 0 until tempMatrix.getColumns()) {
+        for (i in 0 until tempMatrix.getRows())
+            for (j in 0 until other.getColumns())
+                for (k in 0 until tempMatrix.getColumns())
                     this@Matrix[i, j] += tempMatrix[i, k] * other[k, j]
-                }
-            }
-        }
     }
     //endregion
 
     //region Operations with scalar
     operator fun plus(scalar: Double): Matrix {
         val resultMatrix = getCopyOfMatrix(this@Matrix)
+
         for (i in 0 until resultMatrix.getRows())
             for (j in 0 until resultMatrix.getColumns())
                 resultMatrix[i, j] += scalar
@@ -137,6 +130,7 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
 
     operator fun minus(scalar: Double): Matrix {
         val resultMatrix = getCopyOfMatrix(this@Matrix)
+
         for (i in 0 until resultMatrix.getRows())
             for (j in 0 until resultMatrix.getColumns())
                 resultMatrix[i, j] -= scalar
@@ -152,6 +146,7 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
 
     operator fun times(scalar: Double): Matrix {
         val resultMatrix = getCopyOfMatrix(this@Matrix)
+
         for (i in 0 until resultMatrix.getRows())
             for (j in 0 until resultMatrix.getColumns())
                 resultMatrix[i, j] *= scalar
@@ -167,6 +162,7 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
 
     operator fun div(scalar: Double): Matrix {
         val resultMatrix = getCopyOfMatrix(this@Matrix)
+
         for (i in 0 until resultMatrix.getRows())
             for (j in 0 until resultMatrix.getColumns())
                 resultMatrix[i, j] /= scalar
@@ -187,23 +183,22 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
         if (this.dimension != other.dimension)
             return false
 
-        for (i in 0 until this@Matrix.getRows()) {
-            for (j in 0 until this@Matrix.getColumns()) {
+        for (i in 0 until this@Matrix.getRows())
+            for (j in 0 until this@Matrix.getColumns())
                 if (this@Matrix[i, j] != other[i, j])
                     return false
-            }
-        }
+
         return true
     }
 
     override fun toString(): String {
         var image = ""
-        for ((i, element) in this@Matrix.withIndex()) {
-            if (i % getColumns() == getColumns() - 1) {
+
+        for ((i, element) in this@Matrix.withIndex())
+            if (i % getColumns() == getColumns() - 1)
                 image += "$element\n"
-            } else
+            else
                 image += "$element "
-        }
 
         return image
     }
@@ -211,6 +206,7 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
     //region Prefix operations
     operator fun unaryMinus(): Matrix {
         val resultMatrix = getCopyOfMatrix(this@Matrix)
+
         for (i in 0 until resultMatrix.getRows())
             for (j in 0 until resultMatrix.getColumns())
                 resultMatrix[i, j] = -this@Matrix[i, j]
