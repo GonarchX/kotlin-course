@@ -1,27 +1,34 @@
 package lab4
 
-import lab4.MatrixInstrument.Companion.createMutableListWithLists
+import lab4.MatrixInstrument.Companion.createMatrixDataOfZero
 import lab4.MatrixInstrument.Companion.getCopyOfMatrix
+import lab4.MatrixInstrument.Companion.getDeepCopyOfMatrixData
 
-class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
-    var dimension: Pair<Int, Int> = Pair(values.size, values[0].size)
+class Matrix(inputData: Array<Array<Int>>) : Iterable<Int> {
+    var dimension: Pair<Int, Int> = Pair(inputData.size, inputData[0].size)
+    var data: Array<Array<Int>>
 
     init {
-        if (values.size > 1)
-            for (row in values)
-                if (row.size != values[0].size)
+        if (inputData.size > 1)
+            for (row in inputData)
+                if (row.size != inputData[0].size)
                     throw IllegalArgumentException("All matrix rows must be the same size!")
+
+        if (inputData == null)
+            throw IllegalArgumentException("Matrix data shouldn't be null!")
+
+        data = getDeepCopyOfMatrixData(inputData)
     }
 
-    override fun iterator(): Iterator<Double> {
-        return object : Iterator<Double> {
+    override fun iterator(): Iterator<Int> {
+        return object : Iterator<Int> {
             val rows = this@Matrix.dimension.second
             val length = dimension.first * dimension.second
             var i = -1
 
             override fun hasNext(): Boolean = i + 1 < length
 
-            override fun next(): Double {
+            override fun next(): Int {
                 i++
                 return this@Matrix[i / rows, i % rows]
             }
@@ -32,11 +39,11 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
 
     fun getColumns(): Int = dimension.second
 
-    operator fun set(i: Int, j: Int, value: Double) {
-        values[i][j] = value
+    operator fun set(i: Int, j: Int, value: Int) {
+        data[i][j] = value
     }
 
-    operator fun get(i: Int, j: Int): Double = values[i][j]
+    operator fun get(i: Int, j: Int): Int = data[i][j]
 
     //region Operations with other matrix
     operator fun plus(other: Matrix): Matrix {
@@ -57,7 +64,7 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
 
         for (i in 0 until this@Matrix.getRows())
             for (j in 0 until this@Matrix.getColumns())
-                this@Matrix[i, j] = values[i][j] + other[i, j]
+                this@Matrix[i, j] = data[i][j] + other[i, j]
     }
 
     operator fun minus(other: Matrix): Matrix {
@@ -78,14 +85,14 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
 
         for (i in 0 until this@Matrix.getRows())
             for (j in 0 until this@Matrix.getColumns())
-                this@Matrix[i, j] = values[i][j] - other[i, j]
+                this@Matrix[i, j] = data[i][j] - other[i, j]
     }
 
     operator fun times(other: Matrix): Matrix {
         if (this@Matrix.getColumns() != other.getRows())
             throw IllegalArgumentException("Dimension of the other matrix must be equal!")
 
-        val resultMatrix = Matrix(createMutableListWithLists(this@Matrix.getRows(), other.getColumns()))
+        val resultMatrix = Matrix(createMatrixDataOfZero(this@Matrix.getRows(), other.getColumns()))
 
         for (i in 0 until this@Matrix.getRows())
             for (j in 0 until other.getColumns())
@@ -99,10 +106,10 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
         if (this@Matrix.getColumns() != other.getRows())
             throw IllegalArgumentException("Dimension of the other matrix must be equal!")
 
-        val tempMatrix = Matrix(this@Matrix.values.toMutableList())
+        val tempMatrix = getCopyOfMatrix(this@Matrix)
 
-        this@Matrix.values = createMutableListWithLists(this@Matrix.getRows(), other.getColumns())
-        this@Matrix.dimension = Pair(values.size, values[0].size)
+        this@Matrix.data = createMatrixDataOfZero(this@Matrix.getRows(), other.getColumns())
+        this@Matrix.dimension = Pair(data.size, data[0].size)
 
         for (i in 0 until tempMatrix.getRows())
             for (j in 0 until other.getColumns())
@@ -112,7 +119,7 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
     //endregion
 
     //region Operations with scalar
-    operator fun plus(scalar: Double): Matrix {
+    operator fun plus(scalar: Int): Matrix {
         val resultMatrix = getCopyOfMatrix(this@Matrix)
 
         for (i in 0 until resultMatrix.getRows())
@@ -122,13 +129,13 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
         return resultMatrix
     }
 
-    operator fun plusAssign(scalar: Double) {
+    operator fun plusAssign(scalar: Int) {
         for (i in 0 until this@Matrix.getRows())
             for (j in 0 until this@Matrix.getColumns())
                 this@Matrix[i, j] += scalar
     }
 
-    operator fun minus(scalar: Double): Matrix {
+    operator fun minus(scalar: Int): Matrix {
         val resultMatrix = getCopyOfMatrix(this@Matrix)
 
         for (i in 0 until resultMatrix.getRows())
@@ -138,13 +145,13 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
         return resultMatrix
     }
 
-    operator fun minusAssign(scalar: Double) {
+    operator fun minusAssign(scalar: Int) {
         for (i in 0 until this@Matrix.getRows())
             for (j in 0 until this@Matrix.getColumns())
                 this@Matrix[i, j] -= scalar
     }
 
-    operator fun times(scalar: Double): Matrix {
+    operator fun times(scalar: Int): Matrix {
         val resultMatrix = getCopyOfMatrix(this@Matrix)
 
         for (i in 0 until resultMatrix.getRows())
@@ -154,13 +161,13 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
         return resultMatrix
     }
 
-    operator fun timesAssign(scalar: Double) {
+    operator fun timesAssign(scalar: Int) {
         for (i in 0 until this@Matrix.getRows())
             for (j in 0 until this@Matrix.getColumns())
                 this@Matrix[i, j] *= scalar
     }
 
-    operator fun div(scalar: Double): Matrix {
+    operator fun div(scalar: Int): Matrix {
         val resultMatrix = getCopyOfMatrix(this@Matrix)
 
         for (i in 0 until resultMatrix.getRows())
@@ -170,7 +177,7 @@ class Matrix(var values: MutableList<MutableList<Double>>) : Iterable<Double> {
         return resultMatrix
     }
 
-    operator fun divAssign(scalar: Double) {
+    operator fun divAssign(scalar: Int) {
         for (i in 0 until this@Matrix.getRows())
             for (j in 0 until this@Matrix.getColumns())
                 this@Matrix[i, j] /= scalar

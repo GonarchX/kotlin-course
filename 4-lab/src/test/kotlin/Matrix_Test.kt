@@ -5,36 +5,36 @@ import kotlin.test.assertNotEquals
 import lab4.MatrixInstrument.Companion.getCopyOfMatrix
 
 class Matrix_Test() {
-
     //region Operations with another matrix tests
     @Test
     fun plus_WithMatrix() {
-        var temp =
-            mutableListOf(
-                mutableListOf(1.0, 2.0, 3.0),
-                mutableListOf(4.0, 5.0, 6.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
             )
-
-        val matrix = Matrix(temp)
+        )
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val anotherMatrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
+        )
 
-        val anotherMatrix = Matrix(temp)
         val copyOfAnotherMatrix = getCopyOfMatrix(anotherMatrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(11.0, 22.0, 13.0),
-            mutableListOf(34.0, 15.0, 16.0),
+        val expectedValues = arrayOf(
+            arrayOf(11, 22, 13),
+            arrayOf(34, 15, 16),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
         //checking that the operation was successful
-        assertEquals(expectedValues, (matrix + anotherMatrix).values)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], (matrix + anotherMatrix).data[i][j])
         assertEquals(expectedDimensions, (matrix + anotherMatrix).dimension)
 
         //checking that the matrix does not change
@@ -44,32 +44,35 @@ class Matrix_Test() {
 
     @Test
     fun minusWithMatrix() {
-        var temp =
-            mutableListOf(
-                mutableListOf(1.0, 2.0, 3.0),
-                mutableListOf(4.0, 5.0, 6.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
             )
+        )
 
-        val matrix = Matrix(temp)
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val anotherMatrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
+        )
 
-        val anotherMatrix = Matrix(temp)
         val copyOfAnotherMatrix = getCopyOfMatrix(anotherMatrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(-9.0, -18.0, -7.0),
-            mutableListOf(-26.0, -5.0, -4.0),
+        val expectedValues = arrayOf(
+            arrayOf(-9, -18, -7),
+            arrayOf(-26, -5, -4),
         )
+
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
         //checking that the operation was successful
-        assertEquals(expectedValues, (matrix - anotherMatrix).values)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], (matrix - anotherMatrix).data[i][j])
         assertEquals(expectedDimensions, (matrix - anotherMatrix).dimension)
 
         //checking that the matrix does not change
@@ -79,33 +82,34 @@ class Matrix_Test() {
 
     @Test
     fun timesWithMatrix() {
-        var temp =
-            mutableListOf(
-                mutableListOf(1.0, 2.0, 3.0),
-                mutableListOf(4.0, 5.0, 6.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
             )
+        )
 
-        val matrix = Matrix(temp)
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        temp =
-            mutableListOf(
-                mutableListOf(1.0),
-                mutableListOf(2.0),
-                mutableListOf(3.0)
+        val anotherMatrix = Matrix(
+            arrayOf(
+                arrayOf(1),
+                arrayOf(2),
+                arrayOf(3)
             )
-
-        val anotherMatrix = Matrix(temp)
+        )
         val copyOfAnotherMatrix = getCopyOfMatrix(anotherMatrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(14.0),
-            mutableListOf(32.0),
+        val expectedValues = arrayOf(
+            arrayOf(14),
+            arrayOf(32),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 1)
 
         //checking that the operation was successful
-        assertEquals(expectedValues, (matrix * anotherMatrix).values)
+        for (i in 0 until (matrix * anotherMatrix).getRows())
+            for (j in 0 until (matrix * anotherMatrix).getColumns())
+                assertEquals(expectedValues[i][j], (matrix * anotherMatrix).data[i][j])
         assertEquals(expectedDimensions, (matrix * anotherMatrix).dimension)
 
         //checking that the matrix does not change
@@ -117,33 +121,35 @@ class Matrix_Test() {
     //region Assign operations with another matrix tests
     @Test
     fun assignPlus_WithMatrix() {
-        var temp =
-            mutableListOf(
-                mutableListOf(1.0, 2.0, 3.0),
-                mutableListOf(4.0, 5.0, 6.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
             )
+        )
 
-        val matrix = Matrix(temp)
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val anotherMatrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
+        )
 
-        val anotherMatrix = Matrix(temp)
         val copyOfAnotherMatrix = getCopyOfMatrix(anotherMatrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(11.0, 22.0, 13.0),
-            mutableListOf(34.0, 15.0, 16.0),
+        val expectedValues = arrayOf(
+            arrayOf(11, 22, 13),
+            arrayOf(34, 15, 16),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
         matrix += anotherMatrix
         //checking that the operation was successful
-        assertEquals(expectedValues, matrix.values)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], matrix.data[i][j])
         assertEquals(expectedDimensions, matrix.dimension)
 
         //checking that the matrix was change
@@ -153,33 +159,33 @@ class Matrix_Test() {
 
     @Test
     fun assignMinus_WithMatrix() {
-        var temp =
-                mutableListOf(
-                mutableListOf(1.0, 2.0, 3.0),
-            mutableListOf(4.0, 5.0, 6.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
+            )
         )
-
-        val matrix = Matrix(temp)
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val anotherMatrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
-
-        val anotherMatrix = Matrix(temp)
+        )
         val copyOfAnotherMatrix = getCopyOfMatrix(anotherMatrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(-9.0, -18.0, -7.0),
-            mutableListOf(-26.0, -5.0, -4.0),
+        val expectedValues = arrayOf(
+            arrayOf(-9, -18, -7),
+            arrayOf(-26, -5, -4),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
         matrix -= anotherMatrix
         //checking that the operation was successful
-        assertEquals(expectedValues, matrix.values)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], matrix.data[i][j])
         assertEquals(expectedDimensions, matrix.dimension)
 
         //checking that the matrix was change
@@ -189,34 +195,35 @@ class Matrix_Test() {
 
     @Test
     fun assignTimes_WithMatrix() {
-        var temp =
-            mutableListOf(
-                mutableListOf(1.0, 2.0, 3.0),
-                mutableListOf(4.0, 5.0, 6.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
             )
-
-        val matrix = Matrix(temp)
+        )
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        temp =
-            mutableListOf(
-                mutableListOf(1.0),
-                mutableListOf(2.0),
-                mutableListOf(3.0)
+        val anotherMatrix = Matrix(
+            arrayOf(
+                arrayOf(1),
+                arrayOf(2),
+                arrayOf(3)
             )
-
-        val anotherMatrix = Matrix(temp)
+        )
         val copyOfAnotherMatrix = getCopyOfMatrix(anotherMatrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(14.0),
-            mutableListOf(32.0),
+        val expectedValues = arrayOf(
+            arrayOf(14),
+            arrayOf(32),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 1)
 
         matrix *= anotherMatrix
         //checking that the operation was successful
-        assertEquals(expectedValues, matrix.values)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], matrix.data[i][j])
+
         assertEquals(expectedDimensions, matrix.dimension)
 
         //checking that the matrix was change
@@ -228,24 +235,25 @@ class Matrix_Test() {
     //region Operations with another matrix tests
     @Test
     fun plus_WithScalar() {
-        val temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
-
-        val matrix = Matrix(temp)
+        )
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(20.05, 30.05, 20.05),
-            mutableListOf(40.05, 20.05, 20.05),
+        val expectedValues = arrayOf(
+            arrayOf(115, 125, 115),
+            arrayOf(135, 115, 115),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
         //checking that the operation was successful
-        assertEquals(expectedValues, (matrix + 10.05).values)
-        assertEquals(expectedDimensions, (matrix + 10.05).dimension)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], (matrix + 105).data[i][j])
+        assertEquals(expectedDimensions, (matrix + 105).dimension)
 
         //checking that the matrix does not change
         assertEquals(true, copyOfMatrix == matrix)
@@ -253,24 +261,25 @@ class Matrix_Test() {
 
     @Test
     fun minus_WithScalar() {
-         val temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
-
-        val matrix = Matrix(temp)
+        )
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(0.0, 10.0, 0.0),
-            mutableListOf(20.0, 0.0, 0.0),
+        val expectedValues = arrayOf(
+            arrayOf(0, 10, 0),
+            arrayOf(20, 0, 0),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
         //checking that the operation was successful
-        assertEquals(expectedValues, (matrix - 10.0).values)
-        assertEquals(expectedDimensions, (matrix - 10.0).dimension)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], (matrix - 10).data[i][j])
+        assertEquals(expectedDimensions, (matrix - 10).dimension)
 
         //checking that the matrix does not change
         assertEquals(true, copyOfMatrix == matrix)
@@ -278,24 +287,25 @@ class Matrix_Test() {
 
     @Test
     fun times_WithScalar() {
-        val temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
-
-        val matrix = Matrix(temp)
+        )
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(100.0, 200.0, 100.0),
-            mutableListOf(300.0, 100.0, 100.0),
+        val expectedValues = arrayOf(
+            arrayOf(100, 200, 100),
+            arrayOf(300, 100, 100),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
         //checking that the operation was successful
-        assertEquals(expectedValues, (matrix * 10.0).values)
-        assertEquals(expectedDimensions, (matrix * 10.0).dimension)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], (matrix * 10).data[i][j])
+        assertEquals(expectedDimensions, (matrix * 10).dimension)
 
         //checking that the matrix does not change
         assertEquals(true, copyOfMatrix == matrix)
@@ -305,24 +315,26 @@ class Matrix_Test() {
     //region Assign operations with another matrix tests
     @Test
     fun assignPlus_WithScalar() {
-        val temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
 
-        val matrix = Matrix(temp)
+        )
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(20.05, 30.05, 20.05),
-            mutableListOf(40.05, 20.05, 20.05),
+        val expectedValues = arrayOf(
+            arrayOf(115, 125, 115),
+            arrayOf(135, 115, 115),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
-        matrix += 10.05
+        matrix += 105
         //checking that the operation was successful
-        assertEquals(expectedValues, (matrix).values)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], (matrix).data[i][j])
         assertEquals(expectedDimensions, (matrix).dimension)
 
         //checking that the matrix was change
@@ -331,24 +343,25 @@ class Matrix_Test() {
 
     @Test
     fun assignMinus_WithScalar() {
-        val temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
-
-        val matrix = Matrix(temp)
+        )
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(0.0, 10.0, 0.0),
-            mutableListOf(20.0, 0.0, 0.0),
+        val expectedValues = arrayOf(
+            arrayOf(0, 10, 0),
+            arrayOf(20, 0, 0),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
-        matrix -= 10.0
+        matrix -= 10
         //checking that the operation was successful
-        assertEquals(expectedValues, (matrix).values)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], (matrix).data[i][j])
         assertEquals(expectedDimensions, (matrix).dimension)
 
         //checking that the matrix was change
@@ -357,69 +370,80 @@ class Matrix_Test() {
 
     @Test
     fun assignTimes_WithScalar() {
-        val temp =
-            mutableListOf(
-                mutableListOf(10.0, 20.0, 10.0),
-                mutableListOf(30.0, 10.0, 10.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(10, 20, 10),
+                arrayOf(30, 10, 10),
             )
+        )
 
-        val matrix = Matrix(temp)
         val copyOfMatrix = getCopyOfMatrix(matrix)
 
-        val expectedValues = mutableListOf(
-            mutableListOf(100.0, 200.0, 100.0),
-            mutableListOf(300.0, 100.0, 100.0),
+        val expectedValues = arrayOf(
+            arrayOf(100, 200, 100),
+            arrayOf(300, 100, 100),
         )
         val expectedDimensions: Pair<Int, Int> = Pair(2, 3)
 
+        matrix *= 10
         //checking that the operation was successful
-        assertEquals(expectedValues, (matrix * 10.0).values)
-        assertEquals(expectedDimensions, (matrix * 10.0).dimension)
+        for (i in 0 until matrix.getRows())
+            for (j in 0 until matrix.getColumns())
+                assertEquals(expectedValues[i][j], matrix.data[i][j])
+
+        assertEquals(expectedDimensions, matrix.dimension)
 
         //checking that the matrix was change
-        assertNotEquals(true, copyOfMatrix == matrix)
+        assertEquals(false, copyOfMatrix == matrix)
     }
     //endregion
 
     //region Any methods tests
     @Test
     fun isEqual_NotEqual() {
-        var temp =
-            mutableListOf(
-                mutableListOf(1.0, 2.0, 3.0),
-                mutableListOf(4.0, 5.0, 6.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
             )
-        val matrix = Matrix(temp)
-
-        temp = mutableListOf(
-            mutableListOf(1.0, 2.0, 3.0),
-            mutableListOf(4.0, 5.0, 6.0),
-            mutableListOf(7.0, 8.0, 9.0),
         )
-        val other = Matrix(temp)
+
+        val other = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
+                arrayOf(7, 8, 9),
+            )
+        )
         assertEquals(false, matrix == other)
     }
 
     @Test
     fun isEqual_Equal() {
-        val temp =
-            mutableListOf(
-                mutableListOf(1.0, 2.0, 3.0),
-                mutableListOf(4.0, 5.0, 6.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
             )
-        val matrix = Matrix(temp)
-        val other = Matrix(temp)
+        )
+
+        val other = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
+            )
+        )
         assertEquals(true, matrix == other)
     }
 
     @Test
     fun isEqual_NullCase() {
-        val temp =
-            mutableListOf(
-                mutableListOf(1.0, 2.0, 3.0),
-                mutableListOf(4.0, 5.0, 6.0),
+        val matrix = Matrix(
+            arrayOf(
+                arrayOf(1, 2, 3),
+                arrayOf(4, 5, 6),
             )
-        val matrix = Matrix(temp)
+        )
         val other: Matrix? = null
         assertEquals(false, matrix == other)
 
@@ -429,38 +453,58 @@ class Matrix_Test() {
 
 class MatrixInstrument_Test() {
     @Test(expected = IllegalArgumentException::class)
-    fun createMutableListWithLists_NegativeFirstParameter() {
-        val actual = MatrixInstrument.createMutableListWithLists(-666, 0)
+    fun createMatrixDataOfZero_NegativeFirstParameter() {
+        val actual = MatrixInstrument.createMatrixDataOfZero(-666, 0)
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun createMutableListWithLists_NegativeSecondParameter() {
-        val actual = MatrixInstrument.createMutableListWithLists(0, -666)
+    fun createMatrixDataOfZero_NegativeSecondParameter() {
+        val actual = MatrixInstrument.createMatrixDataOfZero(0, -666)
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun createMutableListWithLists_NegativeBothParameters() {
-        val actual = MatrixInstrument.createMutableListWithLists(-666, -666)
+    fun createMatrixDataOfZero_NegativeBothParameters() {
+        val actual = MatrixInstrument.createMatrixDataOfZero(-666, -666)
     }
 
     @Test
-    fun createMutableListWithLists_EmptyResult() {
-        val actual = MatrixInstrument.createMutableListWithLists(0, 0)
+    fun createMatrixDataOfZero_EmptyResult() {
+        val actual = MatrixInstrument.createMatrixDataOfZero(0, 0)
         val expected =
-            mutableListOf<MutableList<Double>>()
+            arrayOf<Array<Int>>()
 
-        assertEquals(expected, actual)
+        assertNotEquals(expected, actual)
     }
 
     @Test
-    fun createMutableListWithLists_CorrectResult() {
-        val actual = MatrixInstrument.createMutableListWithLists(3, 3)
+    fun createMatrixDataOfZero_CorrectResult() {
+        val actual = MatrixInstrument.createMatrixDataOfZero(3, 3)
         val expected =
-            mutableListOf(
-                mutableListOf(0.0, 0.0, 0.0),
-                mutableListOf(0.0, 0.0, 0.0),
-                mutableListOf(0.0, 0.0, 0.0),
+            arrayOf(
+                arrayOf(0, 0, 0),
+                arrayOf(0, 0, 0),
+                arrayOf(0, 0, 0),
             )
-        assertEquals(actual, expected)
+
+        assertNotEquals(actual, expected)
+    }
+
+    @Test
+    fun getDeepCopyOfMatrixData_ChangeRef() {
+        val actual = MatrixInstrument.createMatrixDataOfZero(3, 3)
+        val expected =
+            arrayOf(
+                arrayOf(0, 0, 0),
+                arrayOf(0, 0, 0),
+                arrayOf(0, 0, 0),
+            )
+
+        expected[0][0] = 9
+        expected[1][1] = 9
+        expected[2][2] = 9
+
+        assertEquals(0, actual[0][0])
+        assertEquals(0, actual[1][1])
+        assertEquals(0, actual[2][2])
     }
 }

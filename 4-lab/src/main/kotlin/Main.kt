@@ -1,22 +1,22 @@
 package lab4
 
+import lab4.MatrixInstrument.Companion.getCopyOfMatrix
+
 fun main() {
-    var tempForFirstExample: MutableList<MutableList<Double>> =
-        mutableListOf(
-            mutableListOf(1.0, 2.0, 3.0),
-            mutableListOf(4.0, 5.0, 6.0),
+    val matrix = Matrix(
+        arrayOf(
+            arrayOf(1, 2, 3),
+            arrayOf(4, 5, 6),
         )
+    )
 
-    val matrix = Matrix(tempForFirstExample)
-
-    tempForFirstExample =
-        mutableListOf(
-            mutableListOf(1.0),
-            mutableListOf(2.0),
-            mutableListOf(3.0)
+    var other = Matrix(
+        arrayOf(
+            arrayOf(1),
+            arrayOf(2),
+            arrayOf(3)
         )
-
-    var other = Matrix(tempForFirstExample)
+    )
 
     println("${"-".repeat(10)} Проверка операций без присвоения при работе с другой матрицей ${"-".repeat(10)}")
     println("${"-".repeat(5)} Проверка умножения ${"-".repeat(5)}")
@@ -24,12 +24,12 @@ fun main() {
     println("Вторая матрица:\n$other")
     println("Первая матрица после умножения со второй матрицей:\n${matrix * other}")
 
-    tempForFirstExample =
-        mutableListOf(
-            mutableListOf(10.0, 20.0, 10.0),
-            mutableListOf(30.0, 10.0, 10.0),
-        )
-    other = Matrix(tempForFirstExample)
+    other = Matrix(
+        arrayOf(
+        arrayOf(10, 20, 10),
+        arrayOf(30, 10, 10),
+    ))
+
     println("${"-".repeat(5)} Проверка операций: сложения, вычитания ${"-".repeat(5)}")
     println("Первая матрица:\n$matrix")
     println("Вторая матрица:\n$other")
@@ -38,12 +38,12 @@ fun main() {
 
     //--------------------------------Проверка операций с присвоением при работе с другой матрицей
 
-    var tempForSecondExample: MutableList<MutableList<Double>> =
-        mutableListOf(
-            mutableListOf(10.0, 20.0, 10.0),
-            mutableListOf(30.0, 10.0, 10.0),
+    other = Matrix(
+        arrayOf(
+            arrayOf(10, 20, 10),
+            arrayOf(30, 10, 10),
         )
-    other = Matrix(tempForSecondExample)
+    )
 
     println("${"-".repeat(10)} Проверка операций с присвоением при работе с другой матрицей ${"-".repeat(10)}")
     println("${"-".repeat(5)} Проверка операций: сложения, вычитания ${"-".repeat(5)}")
@@ -51,18 +51,18 @@ fun main() {
     println("Вторая матрица:\n$other")
     matrix += other
     println("Первая матрица после сложения со второй матрицей:\n${matrix}")
-    matrix -= other * 2.0
+    matrix -= other * 2
     println("Первая матрица после вычитания со второй матрицей:\n${matrix}")
 
     matrix += other
-    tempForSecondExample =
-        mutableListOf(
-            mutableListOf(1.0),
-            mutableListOf(2.0),
-            mutableListOf(3.0)
-        )
 
-    other = Matrix(tempForSecondExample)
+    other = Matrix(
+        arrayOf(
+            arrayOf(1),
+            arrayOf(2),
+            arrayOf(3)
+        )
+    )
     println("${"-".repeat(5)} Проверка умножения ${"-".repeat(5)}")
     println("Первая матрица:\n$matrix")
     println("Вторая матрица:\n$other")
@@ -70,20 +70,20 @@ fun main() {
     println("Первая матрица после умножения со второй матрицей:\n${matrix}")
 
     println("${"-".repeat(10)} Проверка операций изменения по индексу ${"-".repeat(10)}")
-    val tempChangeByIndexExample =
-        mutableListOf(
-            mutableListOf(1.0, 2.0, 3.0),
-            mutableListOf(4.0, 5.0, 6.0),
-            mutableListOf(7.0, 8.0, 9.0),
-        )
 
-    val changeByIndexMatrix = Matrix(tempChangeByIndexExample)
+    val changeByIndexMatrix = Matrix(
+        arrayOf(
+            arrayOf(1, 2, 3),
+            arrayOf(4, 5, 6),
+            arrayOf(7, 8, 9),
+        )
+    )
     println("Матрица до изменений:\n$changeByIndexMatrix")
 
-    changeByIndexMatrix[1, 2] = 666.0
+    changeByIndexMatrix[1, 2] = 666
     println("Матрица после изменения элемента по индексу [1, 2] :\n$changeByIndexMatrix")
 
-    changeByIndexMatrix[0, 0] = 999.0
+    changeByIndexMatrix[0, 0] = 999
     println("Матрица после изменения элемента по индексу [0, 0] :\n$changeByIndexMatrix")
 
 
@@ -91,4 +91,3 @@ fun main() {
 
     println("Элемент по индексу [0, 0] :\n${changeByIndexMatrix[0, 0]}")
 }
-

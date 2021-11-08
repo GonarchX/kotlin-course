@@ -2,27 +2,18 @@ package lab4
 
 class MatrixInstrument {
     companion object{
-        fun createMutableListWithLists(rows: Int, columns: Int ): MutableList<MutableList<Double>>{
+        fun createMatrixDataOfZero(rows: Int, columns: Int ): Array<Array<Int>>{
             if (rows < 0 || columns < 0)
                 throw IllegalArgumentException("Number of rows or columns can't be negative!")
 
-            // List of lists
-            var requiredList: MutableList<MutableList<Double>> =
-                mutableListOf<MutableList<Double>>()
+            val requiredList = Array<Array<Int>>(rows) { row -> Array<Int>(columns) { element -> 0}}
 
-            for (i in 0 until rows)
-                requiredList.add(MutableList<Double>(columns) {index -> 0.0})
-            return  requiredList
+            return requiredList
         }
 
-        fun getCopyOfMatrix(matrix: Matrix): Matrix{
-            var copyValues = createMutableListWithLists(matrix.getRows(), matrix.getColumns())
+        fun getCopyOfMatrix(inputMatrix: Matrix): Matrix = Matrix(getDeepCopyOfMatrixData(inputMatrix.data))
 
-            for (i in 0 until matrix.getRows())
-                for (j in 0 until  matrix.getColumns())
-                    copyValues[i][j] = matrix[i,j]
-
-            return Matrix(copyValues)
-        }
+        fun getDeepCopyOfMatrixData(inputArray: Array<Array<Int>>): Array<Array<Int>> =
+            inputArray.clone().map { it -> it.clone() }.toTypedArray()
     }
 }
