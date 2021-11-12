@@ -14,9 +14,6 @@ class Matrix(inputData: Array<Array<Int>>) : Iterable<Int> {
                 if (row.size != inputData[0].size)
                     throw IllegalArgumentException("All matrix rows must be the same size!")
 
-        if (inputData == null)
-            throw IllegalArgumentException("Matrix data shouldn't be null!")
-
         data = getDeepCopyOfMatrixData(inputData)
     }
 
@@ -185,8 +182,16 @@ class Matrix(inputData: Array<Array<Int>>) : Iterable<Int> {
     //endregion
 
     override fun equals(other: Any?): Boolean {
-        if (other == null || other !is Matrix) return false
+        if (this === other)
+            return true
 
+        if (this.javaClass != other?.javaClass)
+            return false
+
+        return this.equals(other as Matrix)
+    }
+
+    fun equals (other: Matrix): Boolean{
         if (this.dimension != other.dimension)
             return false
 
