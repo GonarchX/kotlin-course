@@ -1,7 +1,5 @@
 package lab4
 
-import lab4.MatrixInstrument.Companion.getCopyOfMatrix
-
 fun main() {
     val matrix = Matrix(
         arrayOf(

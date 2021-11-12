@@ -181,6 +181,20 @@ class Matrix(inputData: Array<Array<Int>>) : Iterable<Int> {
     }
     //endregion
 
+    //region Prefix operations
+    operator fun unaryMinus(): Matrix {
+        val resultMatrix = getCopyOfMatrix(this@Matrix)
+
+        for (i in 0 until resultMatrix.getRows())
+            for (j in 0 until resultMatrix.getColumns())
+                resultMatrix[i, j] = -this@Matrix[i, j]
+
+        return resultMatrix
+    }
+
+    operator fun unaryPlus(): Matrix = this
+    //endregion
+
     override fun equals(other: Any?): Boolean {
         if (this === other)
             return true
@@ -214,18 +228,4 @@ class Matrix(inputData: Array<Array<Int>>) : Iterable<Int> {
 
         return image
     }
-
-    //region Prefix operations
-    operator fun unaryMinus(): Matrix {
-        val resultMatrix = getCopyOfMatrix(this@Matrix)
-
-        for (i in 0 until resultMatrix.getRows())
-            for (j in 0 until resultMatrix.getColumns())
-                resultMatrix[i, j] = -this@Matrix[i, j]
-
-        return resultMatrix
-    }
-
-    operator fun unaryPlus(): Matrix = this
-    //endregion
 }
