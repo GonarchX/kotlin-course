@@ -218,15 +218,15 @@ class Matrix(inputData: Array<Array<Int>>) : Iterable<Int> {
     }
 
     override fun toString(): String {
-        var image = ""
+        var stringRepresentation = ""
 
         for ((i, element) in this@Matrix.withIndex())
             if (i % getColumns() == getColumns() - 1)
-                image += "$element\n"
+                stringRepresentation += "$element\n"
             else
-                image += "$element "
+                stringRepresentation += "$element "
 
-        return image
+        return stringRepresentation
     }
 
     override fun hashCode(): Int {
