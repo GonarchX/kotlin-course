@@ -202,10 +202,10 @@ class Matrix(inputData: Array<Array<Int>>) : Iterable<Int> {
         if (this.javaClass != other?.javaClass)
             return false
 
-        return this.equals(other as Matrix)
+        return this.equalsWithMatrix(other as Matrix)
     }
 
-    fun equals (other: Matrix): Boolean{
+    private fun equalsWithMatrix (other: Matrix): Boolean{
         if (this.dimension != other.dimension)
             return false
 
@@ -227,5 +227,11 @@ class Matrix(inputData: Array<Array<Int>>) : Iterable<Int> {
                 image += "$element "
 
         return image
+    }
+
+    override fun hashCode(): Int {
+        var result = dimension.hashCode()
+        result = 31 * result + data.contentDeepHashCode()
+        return result
     }
 }
