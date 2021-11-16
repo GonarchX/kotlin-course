@@ -52,6 +52,9 @@ fun main() {
     println("All books:")
     library.getAllBooks().forEach { println(it) }
 
+    println("\nStatuses of each book")
+    library.getAllBookStatuses().forEach { println("${it.key.name} - ${it.value}") }
+
     println("\nAfter taking books with '3' in name")
     library.takeBook(users[0], library.findBooks("3")[0])
     library.getAllBooks().forEach { println(it) }
@@ -84,6 +87,13 @@ fun main() {
         library.takeBook(users[0], library.getAllAvailableBooks()[0])
         library.takeBook(users[0], library.getAllAvailableBooks()[0])
         library.takeBook(users[0], library.getAllAvailableBooks()[0])
+    } catch (e: Exception) {
+        println(e.message)
+    }
+
+    try {
+        library.returnBook(library.getAllBooks()[0])
+        library.returnBook(library.getAllBooks()[0])
     } catch (e: Exception) {
         println(e.message)
     }
