@@ -1,4 +1,4 @@
-data class Book(val name: String, val author: Author, val year: Int, val genre: Genre)
+data class Book(val name: String, val author: List<Author>, val year: Int, val genre: Genre)
 
 data class Author(val firstName: String, val lastName: String)
 
