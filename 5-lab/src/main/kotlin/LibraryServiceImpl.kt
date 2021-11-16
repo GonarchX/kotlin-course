@@ -1,4 +1,4 @@
-import java.lang.RuntimeException
+import kotlin.RuntimeException
 
 class LibraryServiceImpl : LibraryService {
     private val books: MutableSet<Book> = mutableSetOf()
@@ -89,17 +89,17 @@ class LibraryServiceImpl : LibraryService {
         if (!isRegisteredUser(user))
             throw RuntimeException("This user is not a user of the library!")
 
-        if (booksByUser[user]!!.count() < countOfBooksByUser) {
-            booksByUser[user]!!.add(book)
+        if (booksByUser[user]!!.count() >= countOfBooksByUser) {
+            throw RuntimeException("Library maximum books by user is ${countOfBooksByUser}. $user now have ${booksByUser[user]!!.count()}")
         }
-        else
-            throw RuntimeException("Library maximum books by user is ${countOfBooksByUser}. This user now have ${booksByUser[user]!!.count()}")
 
+        booksByUser[user]!!.add(book)
         booksStatus[book] = Status.UsedBy(user)
     }
 
     override fun returnBook(book: Book) {
         books.find { it == book } ?: throw RuntimeException("Library doesn't contained this book ever!")
+        if (booksStatus[book] == Status.Available) throw RuntimeException("$book is already available!")
 
         booksByUser.filter { it.value.contains(book) }.map { it.value }.first().remove(book)
         booksStatus[book] = Status.Available
