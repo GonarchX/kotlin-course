@@ -1,10 +1,8 @@
-data class Book(val name: String, val author: Author, val year: Int, val genre: Genre, var status: Status)
+data class Book(val name: String, val author: Author, val year: Int, val genre: Genre)
 
 data class Author(val firstName: String, val lastName: String)
 
-data class User (val firstName: String, val lastName: String){
-    val books: MutableList<Book> = mutableListOf()
-}
+data class User (val firstName: String, val lastName: String)
 
 enum class Genre {
     Action,
