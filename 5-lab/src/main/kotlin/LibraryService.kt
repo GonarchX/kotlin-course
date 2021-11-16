@@ -3,7 +3,13 @@ interface LibraryService {
     fun findBooks(author: Author): List<Book>
     fun findBooks(year: Int): List<Book>
     fun findBooks(genre: Genre): List<Book>
-    fun findBooks(substring: String? = null, author: Author? = null, year: Int? = null, genre: Genre? = null, status: Status? = null): List<Book>
+    fun findBooks(
+        substring: String? = null,
+        author: Author? = null,
+        year: Int? = 2000,
+        genre: Genre? = Genre.Classics,
+        status: Status? = Status.Available
+    ): List<Book>
 
     fun getAllBooks(): List<Book>
     fun getAllAvailableBooks(): List<Book>
