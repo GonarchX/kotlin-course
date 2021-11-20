@@ -1,4 +1,4 @@
-import kotlin.RuntimeException
+import kotlin.IllegalStateException
 
 class LibraryServiceImpl : LibraryService {
     private val books: MutableSet<Book> = mutableSetOf()
@@ -38,10 +38,10 @@ class LibraryServiceImpl : LibraryService {
 
     override fun getBookStatus(book: Book): Status {
         books.find { it == book }
-            ?: throw RuntimeException("Library doesn't contain this book!")
+            ?: throw IllegalStateException("Library doesn't contain this book!")
 
         if (booksStatus[book] == null)
-            throw RuntimeException("Unknown book status!")
+            throw IllegalStateException("Unknown book status!")
 
         return booksStatus[book]!!
     }
@@ -52,14 +52,14 @@ class LibraryServiceImpl : LibraryService {
 
     override fun setBookStatus(book: Book, status: Status) {
         books.find { it == book }
-            ?: throw RuntimeException("Library doesn't contain this book!")
+            ?: throw IllegalStateException("Library doesn't contain this book!")
 
         booksStatus[book] = status
     }
 
     override fun addBook(book: Book, status: Status) {
         if (books.find { it == book } != null) {
-            throw RuntimeException("This book is already in this library!")
+            throw IllegalStateException("This book is already in this library!")
         }
 
         booksStatus[book] = status
@@ -72,7 +72,7 @@ class LibraryServiceImpl : LibraryService {
 
     override fun registerUser(user: User) {
         if (isRegisteredUser(user))
-            throw RuntimeException("This user is already a user of the library!")
+            throw IllegalStateException("This user is already a user of the library!")
 
         booksByUser[user] = mutableSetOf()
         users.add(user)
@@ -80,17 +80,17 @@ class LibraryServiceImpl : LibraryService {
 
     override fun unregisterUser(user: User) {
         if (!isRegisteredUser(user))
-            throw RuntimeException("This user is not a user of the library!")
+            throw IllegalStateException("This user is not a user of the library!")
 
         users.remove(user)
     }
 
     override fun takeBook(user: User, book: Book) {
         if (!isRegisteredUser(user))
-            throw RuntimeException("This user is not a user of the library!")
+            throw IllegalStateException("This user is not a user of the library!")
 
         if (booksByUser[user]!!.count() >= countOfBooksByUser) {
-            throw RuntimeException("Library maximum books by user is ${countOfBooksByUser}. $user now have ${booksByUser[user]!!.count()}")
+            throw IllegalStateException("Library maximum books by user is ${countOfBooksByUser}. $user now have ${booksByUser[user]!!.count()}")
         }
 
         booksByUser[user]!!.add(book)
@@ -98,8 +98,8 @@ class LibraryServiceImpl : LibraryService {
     }
 
     override fun returnBook(book: Book) {
-        books.find { it == book } ?: throw RuntimeException("Library doesn't contained this book ever!")
-        if (booksStatus[book] == Status.Available) throw RuntimeException("$book is already available!")
+        books.find { it == book } ?: throw IllegalStateException("Library doesn't contained this book ever!")
+        if (booksStatus[book] == Status.Available) throw IllegalStateException("$book is already available!")
 
         booksByUser.filter { it.value.contains(book) }.map { it.value }.first().remove(book)
         booksStatus[book] = Status.Available
