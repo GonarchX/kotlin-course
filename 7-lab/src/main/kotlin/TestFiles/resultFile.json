@@ -1,0 +1,29 @@
+[
+    {
+        "type": "lab3.Circle",
+        "radius": 2.0
+    },
+    {
+        "type": "lab3.Square",
+        "sideLen": 4.0
+    },
+    {
+        "type": "lab3.Rectangle",
+        "sideLenA": 2.0,
+        "sideLenB": 4.0
+    },
+    {
+        "type": "lab3.Triangle",
+        "sideLenA": 1.0,
+        "sideLenB": 2.0,
+        "sideLenC": 2.5
+    },
+    {
+        "type": "lab3.Circle",
+        "radius": 2.0
+    },
+    {
+        "type": "lab3.Square",
+        "sideLen": 4.0
+    }
+]
